@@ -39,13 +39,13 @@
 			"SELECT Posts.*,
 			 COUNT(Comments.id) AS comments_count
 			 FROM Posts
-			 INNER JOIN Comments on Comments.post_id = Posts.id
+			 LEFT JOIN Comments on Comments.post_id = Posts.id
 			 GROUP BY Posts.id
 			 ORDER BY Posts.id"
 		);	
 		return view('post-feed', ['posts' => $posts]);
 	});
-
+	
 	/**
 	 * Rubric: Most recent posts
 	 * There is a most recent page, which shows only the posts that have been made in the last 7 

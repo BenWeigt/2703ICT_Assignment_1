@@ -1,7 +1,7 @@
 @extends('designs/postir')
 
 @section('content')
-	<form method="post" action="{{REL_DIR}}/posts/create" style="max-width: 750px; margin: auto; display: none;">
+	<form method="post" action="{{REL_DIR}}/posts/create" style="max-width: 750px; margin: auto;">
 		{{csrf_field()}}
 		<div class="form-group">
 			<label for="new-post-username">Username</label>
