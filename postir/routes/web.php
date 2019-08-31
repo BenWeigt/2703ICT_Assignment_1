@@ -41,7 +41,7 @@
 			 FROM Posts
 			 LEFT JOIN Comments on Comments.post_id = Posts.id
 			 GROUP BY Posts.id
-			 ORDER BY Posts.id"
+			 ORDER BY Posts.id DESC"
 		);	
 		return view('post-feed', ['posts' => $posts]);
 	});
