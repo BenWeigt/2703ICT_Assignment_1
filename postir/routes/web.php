@@ -36,10 +36,9 @@
 	 */
 	Route::get('/', function(){
 		$posts = DB::select(
-			"SELECT Posts.*,
-			 COUNT(Comments.id) AS comments_count
+			"SELECT Posts.*, COUNT(Comments.id) AS comment_count
 			 FROM Posts
-			 LEFT JOIN Comments on Comments.post_id = Posts.id
+			 LEFT JOIN Comments ON Comments.post_id = Posts.id
 			 GROUP BY Posts.id
 			 ORDER BY Posts.id DESC"
 		);	
@@ -52,7 +51,15 @@
 	 * days.
 	 */
 	Route::get('/recent', function(){
-		
+		$posts = DB::select(
+			"SELECT Posts.*, COUNT(Comments.id) AS comment_count
+			 FROM Posts
+			 LEFT JOIN Comments ON Comments.post_id = Posts.id
+			 WHERE Posts.timestamp > date('now', '-7 days')
+			 GROUP BY Posts.id
+			 ORDER BY Posts.id DESC"
+		);
+		return view('post-feed', ['posts' => $posts]);
 	});
 
 	/**
@@ -62,9 +69,10 @@
 	 * a post should contain that post and all comments for that post.
 	 */
 	Route::get('/posts/{postId}', function($postId){
-		return view('post-feed' /*, ['post' => $post]*/);
+		$posts = DB::select('SELECT * FROM Posts WHERE id = ?', $postId);
+		$comments = DB::select('SELECT * FROM Comments WHERE post_id = ?', $postId);
+		return view('post', ['post' => $posts[0], 'comments' => $comments]);
 	});
-
 
 	/**
 	 * Rubric: Display unique users/posts by a user
@@ -73,11 +81,27 @@
 	 * display all posts made by that user.
 	 */
 	Route::get('/users', function(){
-
+		$users = DB::select(
+			"SELECT Posts.username, COUNT(Posts.id) AS post_count
+			 FROM Posts
+			 LEFT JOIN Comments ON Comments.post_id = Posts.id
+			 WHERE Posts.timestamp > date('now', '-7 days')
+			 GROUP BY Posts.username
+			 ORDER BY Posts.id DESC"
+		);
+		return view('users', ['users' => $users]);
 	});
 
-	Route::get('/users/{userId}', function($userId){
-
+	Route::get('/users/{username}/posts', function($username){
+		$posts = DB::select(
+			"SELECT Posts.*, COUNT(Comments.id) AS comment_count
+			 FROM Posts
+			 LEFT JOIN Comments ON Comments.post_id = Posts.id
+			 WHERE Posts.username = ?
+			 GROUP BY Posts.id
+			 ORDER BY Posts.id DESC", $username
+		);	
+		return view('post-feed', ['posts' => $posts]);
 	});
 
 	/**
@@ -90,9 +114,18 @@
 	 * Table names, keys, columns, relationships, cardinality. Linked to from the website.
 	 */
 	Route::get('/about', function(){
-
+		return view('about');
 	});
 
+
+
+
+
+
+
+
+
+	
 	/**
 	 * Rubric: Create Post
 	 * The home page must display a form for the user to create a new post. Each post should 

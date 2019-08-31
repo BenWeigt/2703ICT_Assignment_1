@@ -1,6 +1,27 @@
 @extends('designs/postir')
 
 @section('content')
+	<div class="post">
+		@if (substr($post->icon, 0, 21) !== 'data:image/png;base64')
+			<div class="post-icon">{{$post->icon}}</div>
+		@else
+			<img class="post-icon" src="{{$post->icon}}">
+		@endif
+		<div class="post-comment-count">{{$post->comment_count}}</div>
+		<div class="post-username">{{$post->username}}</div>
+		<h3 class="post-title">{{$post->title}}</h3>
+		<p class="post-content">{{$post->content}}</p>
+
+		<div class="comments">
+			@foreach ($comments as $comment)
+				<div class="comment">
+					<div class="post-username">{{$comment->username}}</div>
+					<p class="post-content">{{$comment->content}}</p>
+				</div>
+			@endforeach
+		</div>
+	</div>
+
 	<form method="post" action="{{REL_DIR}}/posts/create" style="max-width: 750px; margin: auto;">
 		{{csrf_field()}}
 		<div class="form-group">
@@ -17,20 +38,4 @@
 		</div>
 		<button type="submit" class="btn btn-primary" style="display: block; margin: auto;">Create Post</button>
 	</form>
-
-	<div class="posts">
-		@foreach ($posts as $post)
-			<div class="post">
-				@if (substr($post->icon, 0, 21) !== 'data:image/png;base64')
-					<div class="post-icon">{{$post->icon}}</div>
-				@else
-					<img class="post-icon" src="{{$post->icon}}">
-				@endif
-				<div class="post-comment-count">{{$post->comment_count}}</div>
-				<div class="post-username">{{$post->username}}</div>
-				<h3 class="post-title">{{$post->title}}</h3>
-				<p class="post-content">{{$post->content}}</p>
-			</div>
-		@endforeach
-	</div>
 @endsection
