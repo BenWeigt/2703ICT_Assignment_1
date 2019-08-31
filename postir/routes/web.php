@@ -55,7 +55,7 @@
 			"SELECT Posts.*, COUNT(Comments.id) AS comment_count
 			 FROM Posts
 			 LEFT JOIN Comments ON Comments.post_id = Posts.id
-			 WHERE Posts.timestamp > date('now', '-7 days')
+			 WHERE Posts.timestamp > strftime('%s', 'now', '-7 days')
 			 GROUP BY Posts.id
 			 ORDER BY Posts.id DESC"
 		);
@@ -79,13 +79,12 @@
 	 * There is a page that lists all unique users that have made a post (i.e. a user is only 
 	 * displayed once no matter how many posts this user has made). Clicking on the user should 
 	 * display all posts made by that user.
+	 * 
 	 */
 	Route::get('/users', function(){
 		$users = DB::select(
 			"SELECT Posts.username, COUNT(Posts.id) AS post_count
 			 FROM Posts
-			 LEFT JOIN Comments ON Comments.post_id = Posts.id
-			 WHERE Posts.timestamp > date('now', '-7 days')
 			 GROUP BY Posts.username
 			 ORDER BY Posts.id DESC"
 		);
@@ -125,7 +124,7 @@
 
 
 
-	
+
 	/**
 	 * Rubric: Create Post
 	 * The home page must display a form for the user to create a new post. Each post should 
