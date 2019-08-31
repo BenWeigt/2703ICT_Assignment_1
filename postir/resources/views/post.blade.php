@@ -26,12 +26,11 @@
 		{{csrf_field()}}
 		<input name="post_id" type="hidden" value="{{$post->id}}">
 		<div class="form-group">
-			<label for="new-post-username">Username</label>
-			<input name="username" type="text" class="form-control" id="new-post-username" required>
+			<label for="new-comment-username">Username</label>
+			<input name="username" type="text" class="form-control" id="new-comment-username" required>
 		</div>
 		<div class="form-group">
-			<label for="new-post-content">What are your thoughts?</label>
-			<textarea name="content" class="form-control" id="new-post-content" required></textarea>
+			<textarea name="content" class="form-control" id="new-comment-content" placeholder="What are your thoughts?" required></textarea>
 		</div>
 		<button type="submit" class="btn btn-primary" style="display: block; margin: auto;">Comment</button>
 	</form>

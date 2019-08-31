@@ -37,7 +37,7 @@
 		let posts = document.querySelectorAll('.post');
 		for (const post of posts) {
 			post.addEventListener('click', ()=>{
-				location.href = '{{REL_DIR}}/posts/'+post.postId;
+				location.href = '{{REL_DIR}}/posts/'+post.dataset.postId;
 			});
 		}
 	</script>

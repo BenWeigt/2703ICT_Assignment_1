@@ -13,7 +13,7 @@
 		let users = document.querySelectorAll('.post');
 		for (const user of users) {
 			user.addEventListener('click', ()=>{
-				location.href = '{{REL_DIR}}/users/'+user.userId;
+				location.href = '{{REL_DIR}}/users/'+user.dataset.userId;
 			});
 		}
 	</script>
