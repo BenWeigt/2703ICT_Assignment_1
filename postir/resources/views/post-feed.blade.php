@@ -21,7 +21,7 @@
 	<div class="posts">
 		@foreach ($posts as $post)
 			<div class="post">
-				@if (strlen($post->icon) === 1)
+				@if (substr($post->icon, 0, 21) !== 'data:image/png;base64')
 					<div class="post-icon">{{$post->icon}}</div>
 				@else
 					<img class="post-icon" src="{{$post->icon}}">
