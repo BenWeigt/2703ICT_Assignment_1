@@ -69,8 +69,8 @@
 	 * a post should contain that post and all comments for that post.
 	 */
 	Route::get('/posts/{postId}', function($postId){
-		$posts = DB::select('SELECT * FROM Posts WHERE id = ?', $postId);
-		$comments = DB::select('SELECT * FROM Comments WHERE post_id = ?', $postId);
+		$posts = DB::select('SELECT * FROM Posts WHERE id = ?', [$postId]);
+		$comments = DB::select('SELECT * FROM Comments WHERE post_id = ?', [$postId]);
 		return view('post', ['post' => $posts[0], 'comments' => $comments]);
 	});
 
@@ -79,7 +79,6 @@
 	 * There is a page that lists all unique users that have made a post (i.e. a user is only 
 	 * displayed once no matter how many posts this user has made). Clicking on the user should 
 	 * display all posts made by that user.
-	 * 
 	 */
 	Route::get('/users', function(){
 		$users = DB::select(
@@ -90,7 +89,7 @@
 		);
 		return view('users', ['users' => $users]);
 	});
-
+	
 	Route::get('/users/{username}/posts', function($username){
 		$posts = DB::select(
 			"SELECT Posts.*, COUNT(Comments.id) AS comment_count
@@ -98,7 +97,7 @@
 			 LEFT JOIN Comments ON Comments.post_id = Posts.id
 			 WHERE Posts.username = ?
 			 GROUP BY Posts.id
-			 ORDER BY Posts.id DESC", $username
+			 ORDER BY Posts.id DESC", [$username]
 		);	
 		return view('post-feed', ['posts' => $posts]);
 	});

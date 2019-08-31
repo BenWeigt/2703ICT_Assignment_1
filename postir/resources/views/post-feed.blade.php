@@ -20,7 +20,7 @@
 
 	<div class="posts">
 		@foreach ($posts as $post)
-			<div class="post">
+			<div class="post" data-post-id="{{$post->id}}">
 				@if (substr($post->icon, 0, 21) !== 'data:image/png;base64')
 					<div class="post-icon">{{$post->icon}}</div>
 				@else
@@ -33,4 +33,12 @@
 			</div>
 		@endforeach
 	</div>
+	<script>
+		let posts = document.querySelectorAll('.post');
+		for (const post of posts) {
+			post.addEventListener('click', ()=>{
+				location.href = '{{REL_DIR}}/posts/'+post.postId;
+			});
+		}
+	</script>
 @endsection
