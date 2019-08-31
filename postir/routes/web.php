@@ -174,7 +174,20 @@
 	 * Users can add comments to a post. A comment must have a message and a user, but no title. 
 	 */
 	Route::post('/comments/create', function(){
-
+		$postId = request('post_id');
+		$username = request('username');
+		$content = request('content');
+		// Some really stupidly naive sanity checking. Won't block any real attempts to bypass.
+		if (is_string($username) && is_string($content) && strlen($username) <= 80)
+		{
+			$postId = DB::table('Comments')->insert([
+				'timestamp' => time(),
+				'post_id' => $postId,
+				'username' => $username,
+				'content' => $content
+			]);
+		}
+		return redirect('/posts/'.$postId);
 	});
 
 	/**
