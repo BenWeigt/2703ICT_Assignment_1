@@ -26,6 +26,7 @@
 				@else
 					<img class="post-icon" src="{{$post->icon}}">
 				@endif
+				<div class="post-comments-count">{{$post->comments_count}}</div>
 				<div class="post-username">{{$post->username}}</div>
 				<h3 class="post-title">{{$post->title}}</h3>
 				<p class="post-content">{{$post->content}}</p>
