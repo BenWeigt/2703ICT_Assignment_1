@@ -169,8 +169,9 @@ h1 {
 
 .post.fullpage {
 	position: relative;
+	padding-right: 5px;
 	cursor: default;
-	grid-template-columns: max-content auto;
+	grid-template-columns: min-content auto;
 	grid-template-rows: repeat(5, max-content);
 	grid-column-gap: 0px;
 	grid-row-gap: 0px;
@@ -308,10 +309,9 @@ div.post-icon {
 
 #new-post-title,
 #new-post-content,
-.post-create button,
 #new-comment-username,
 #new-comment-content,
-#comment-create button {
+.container-fluid button {
 	transition: transform 200ms ease, width 200ms ease;
 }
 #new-post-username, #new-comment-username {
@@ -327,16 +327,23 @@ div.post-icon {
 #new-post-title, .post-create button {
 	margin: 5px auto;
 }
+.container-fluid button {
+	margin: 0 auto;
+}
 #comment-create button {
 	margin: 0 auto;
 }
-.post-create button, #comment-create button {
+.container-fluid button {
 	background-color: #007709;
 	display: block;
 	outline: none;
 	border: none;
 	width: 180px;
 	margin-bottom: 0px;
+}
+
+#post-body-edit input, #post-body-edit textarea, #post-body-edit button {
+	margin-bottom: 5px;
 }
 
 .post-create:not(.focused) > #new-post-content,
@@ -356,8 +363,7 @@ div.post-icon {
 }
 
 @media only screen and (max-width: 575px) {
-	.post-create button,
-	#comment-create button,
+	.container-fluid button
 	{
 		width: 100%;
 	}
@@ -385,7 +391,7 @@ div.post-icon {
 .comment {
 	position: relative;
 }
-.comment-remove, .post-remove {
+.comment-remove, .post-remove, #post-edit {
 	cursor: pointer;
 	position: absolute;
 	font-size: 22px;
@@ -397,11 +403,24 @@ div.post-icon {
 	transition: all 100ms ease;
 	opacity: 0.2;
 }
-.comment-remove:hover, .post-remove:hover {
+#post-edit {
+	background: #4CAF50;
+	-webkit-background-clip: text;
+	transition: all 100ms ease;
+	right: 30px;
+	transform: scale(1.15);
+	opacity: 0.2;
+}
+.comment-remove:hover, .post-remove:hover, #post-edit:hover {
 	opacity: 1;
 }
 .comment-remove:before, .post-remove:before {
 	content: '❌';
+}
+#post-edit:before {
+	content: '✎';
+	font-family: 'Roboto',Arial,Helvetica,sans-serif;
+	font-size: 24px;
 }
 .comment-username {
 	background: linear-gradient(233deg, #70f36f, #ffb369, #40e4ff, #fe7aff, #c23eff, #fffb3e);
@@ -425,6 +444,14 @@ div.post-icon {
 }
 .comment-content {
 	padding: 0 5px 0 20px;
+}
+
+#post-body {
+	grid-area: 1 / 2 / 4 / 2;
+}
+#post-body-edit {
+	display: none;
+	grid-area: 1 / 2 / 4 / 2;
 }
 
 

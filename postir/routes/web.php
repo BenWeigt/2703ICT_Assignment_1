@@ -167,7 +167,7 @@
 			'title' => $title,
 			'content' => $content
 		]);
-		return redirect('/posts/'+$id);
+		return redirect('/posts/'.$id);
 	});
 
 	/**
