@@ -259,11 +259,11 @@ div.post-icon {
 	-webkit-background-clip: text;
 	transition: all 200ms ease;
 }
-.post-create.post-create-focused:before {
+.post-create.focused:before {
 	font-size: 20px;
 	padding-left: 9px;
 }
-.post-create.post-create-focused {
+.post-create.focused {
 	padding-left: 75px;
 }
 
@@ -290,9 +290,9 @@ div.post-icon {
 	margin-bottom: 0px;
 }
 
-.post-create:not(.post-create-focused) > #new-post-content,
-.post-create:not(.post-create-focused) > #new-post-title,
-.post-create:not(.post-create-focused) > button {
+.post-create:not(.focused) > #new-post-content,
+.post-create:not(.focused) > #new-post-title,
+.post-create:not(.focused) > button {
 	transform: scale(0);
 	pointer-events: none;
 	box-sizing: border-box;
@@ -308,11 +308,11 @@ div.post-icon {
 	.post-create button {
 		width: 100%;
 	}
-	.post-create.post-create-focused:before {
+	.post-create.focused:before {
 		transform: translateY(-50%) scale(0);
 		opacity: 0;
 	}
-	.post-create.post-create-focused {
+	.post-create.focused {
 		padding-left: 5px;
 	}
 }

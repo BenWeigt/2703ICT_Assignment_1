@@ -16,7 +16,7 @@
 			form.addEventListener('focus', (evt)=>{
 				if (evt.target && form.contains(evt.target))
 				{
-					form.classList.add('post-create-focused');
+					form.classList.add('focused');
 				}
 			}, true);
 			form.addEventListener('blur', (evt)=>{
@@ -24,7 +24,7 @@
 				{
 					if (!inputUsername.value && !inputTitle.value && !inputContent.value)
 					{
-						form.classList.remove('post-create-focused');
+						form.classList.remove('focused');
 					}
 				}
 			}, true);
