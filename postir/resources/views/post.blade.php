@@ -32,7 +32,7 @@
 
 		{{-- Post body --}}
 		<div id="post-body">
-			<div class="post-username">By <a href="{{REL_DIR}}/users/{{$post->username}}/posts">{{$post->username}}</a></div>
+			<div class="post-username">By <a href="{{REL_DIR}}/users/{{$post->username}}/posts">{{$post->username}}</a> @{{date('m/d/Y H:i:s', $post->timestamp)}}</div>
 			<h3 class="post-title">{{$post->title}}</h3>
 			<p class="post-content">{{$post->content}}</p>
 		</div>
