@@ -1,10 +1,10 @@
 {{-- Post create --}}
 <form method="post" id="post-create" action="{{REL_DIR}}/posts/create" class="post-create">
 	{{csrf_field()}}
-	<input name="username" type="text" class="form-control" id="new-post-username" required>
-	<input name="title" type="text" class="form-control" id="new-post-title" required>
-	<textarea name="content" class="form-control" id="new-post-content" required></textarea>
-	<button type="submit" class="btn btn-primary" style="display: block; margin: auto;">Create Post</button>
+	<input name="username" type="text" class="form-control" id="new-post-username" placeholder="Username" title="Any combination of 3 to 24 letters, numbers, dashes and underscores." required minlength="3" maxlength="24" pattern="[a-zA-Z0-9_-]*">
+	<input name="title" type="text" class="form-control" id="new-post-title" placeholder="Post title" required minlength="3" maxlength="80">
+	<textarea name="content" class="form-control" placeholder="Your post..." id="new-post-content" required></textarea>
+	<button type="submit" class="btn btn-primary">Create Post</button>
 
 	<script>
 		(()=>{
