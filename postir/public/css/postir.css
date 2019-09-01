@@ -82,6 +82,67 @@ h1 {
 	}
 }
 
+
+
+.users {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+}
+.user {
+	width: calc(50% - 5px);
+	box-sizing: border-box;
+	background-color: #3b3e46;
+	cursor: pointer;
+	border-radius: 4px;
+	color: #ffffff;
+	padding: 5px 0 0 5px;
+	margin: 5px 0;
+	-webkit-box-shadow: 0px 2px 11px 0px #0f1011;
+	-moz-box-shadow: 0px 2px 11px 0px #0f1011;
+	box-shadow: 0px 2px 11px 0px #0f1011;
+}
+.user-username, .user-post-count {
+	width: 100%;
+	text-align: center;
+	font-weight: 700;
+	font-size: 25px;
+	background: linear-gradient(280deg, #70f36f, #ffb369, #40e4ff, #fe7aff, #c23eff, #fffb3e);
+	background-size: 800% 800%;
+	-webkit-animation: bg-gradient-anim 19s ease infinite;
+	-moz-animation: bg-gradient-anim 19s ease infinite;
+	animation: bg-gradient-anim 19s ease infinite;
+	color: transparent;
+	-webkit-background-clip: text;
+}
+.user-post-count {
+	font-size: 30px;
+	background: linear-gradient(30deg, #70f36f, #ffb369, #40e4ff, #fe7aff, #c23eff, #fffb3e);
+	color: transparent;
+	-webkit-background-clip: text;
+}
+.user-post-count:after {
+	background: linear-gradient(30deg, #70f36f, #ffb369, #40e4ff, #fe7aff, #c23eff, #fffb3e);
+	background-size: 800% 800%;
+	-webkit-animation: bg-gradient-anim 19s ease infinite;
+	-moz-animation: bg-gradient-anim 19s ease infinite;
+	animation: bg-gradient-anim 19s ease infinite;
+	color: transparent;
+	-webkit-background-clip: text;
+	font-size: 15px;
+	content: 'POSTS';
+	display: inline-block;
+	vertical-align: text-top;
+	line-height: 42px;
+}
+
+.post:hover, .user:hover {
+	transform: scale(1.0075);
+}
+
+
+
+
 .post {
 	box-sizing: border-box;
 	background-color: #3b3e46;
@@ -102,6 +163,7 @@ h1 {
                          "post-icon  post-title"
                          "post-icon  post-content";
 }
+
 .post-comment-count {
 	grid-area: count;
 	font-size: 25px;
