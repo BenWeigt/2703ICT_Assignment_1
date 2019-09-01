@@ -215,9 +215,11 @@ div.post-icon {
 }
 .post-create button {
 	background-color: #007709;
+	display: block;
 	outline: none;
 	border: none;
 	width: 180px;
+	margin-bottom: 0px;
 }
 
 .post-create:not(.post-create-focused) > #new-post-content,
