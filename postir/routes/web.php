@@ -1,5 +1,6 @@
 <?php
 	define('REL_DIR', '/2703ICT_Assignment_1/postir/public');
+	define('EMOJ_LIST', ['💩','🍆','🤏','🐱‍👤','🙏','😂','🔥','🤘','😈','👌','😎','👍','❤️','🎶','💩']);
 	/**
 	 * Rubric: UI Design 
 	 * Layout (navigation, etc), ease of use, aesthetics.
@@ -13,16 +14,13 @@
 	 * 
 	 * Rubric: Code commenting and naming
 	 * Every function commented Use appropriate names for files, functions, and variables.
-	 */
-
-
-
-	/**
+	 * 
 	 * Rubric: Security HTML sanitisation 
 	 * Implement proper security measure. E.g. performs HTML, SQL sanitization, and prevents CSRF 
 	 * attack etc.
 	 */
 
+	/* ******************* GET Handlers ********************* */
 	/**
 	 * Home/Landing
 	 * Displays a feed of all posts, tagged with their comment count. Also contains a form for
@@ -42,7 +40,7 @@
 			 GROUP BY Posts.id
 			 ORDER BY Posts.id DESC"
 		);	
-		return view('post-feed', ['posts' => $posts]);
+		return view('home', ['posts' => $posts]);
 	});
 	
 	/**
@@ -59,7 +57,7 @@
 			 GROUP BY Posts.id
 			 ORDER BY Posts.id DESC"
 		);
-		return view('post-feed', ['posts' => $posts]);
+		return view('recent', ['posts' => $posts]);
 	});
 
 	/**
@@ -98,8 +96,8 @@
 			 WHERE Posts.username = ?
 			 GROUP BY Posts.id
 			 ORDER BY Posts.id DESC", [$username]
-		);	
-		return view('post-feed', ['posts' => $posts]);
+		);
+		return view('user-posts', ['posts' => $posts, 'username' => $username]);
 	});
 
 	/**
@@ -118,13 +116,10 @@
 
 
 
-
-
-
-
-
-
+	/* ******************* POST Handlers ********************* */
 	/**
+	 * Posts creation handler
+	 * 
 	 * Rubric: Create Post
 	 * The home page must display a form for the user to create a new post. Each post should 
 	 * contain a title, a message, a date, an icon, and a user’s name (the user is not required 
@@ -138,6 +133,10 @@
 		$title = request('title');
 		$icon = request('icon');
 		$content = request('content');
+
+		if (empty($icon))
+			$icon = EMOJ_LIST[rand(0, count(EMOJ_LIST)-1)];
+
 		// Some really stupidly naive sanity checking. Won't block any real attempts to bypass.
 		if (is_string($username) && is_string($title) && strlen($username) <= 80)
 		{
@@ -145,7 +144,7 @@
 				'timestamp' => time(),
 				'username' => $username,
 				'title' => $title,
-				// 'icon' => $icon,
+				'icon' => $icon,
 				'content' => $content
 			]);
 		}
@@ -153,23 +152,44 @@
 	});
 
 	/**
+	 * Posts edit handler
+	 * 
 	 * Rubric: Edit Post
 	 * Users can edit posts. After a post is edited, the comments page for that post is displayed.
 	 */
 	Route::post('/posts/edit', function(){
-
+		$id = request('id');
+		$username = request('username');
+		$title = request('title');
+		$content = request('content');
+		DB::table('Posts')->where('id', $id)->update([
+			'username' => $username,
+			'title' => $title,
+			'content' => $content
+		]);
+		return redirect('/posts/'+$id);
 	});
 
 	/**
+	 * Posts delete handler
+	 * 
 	 * Rubric: Deletes post
 	 * Users can delete posts. When user deletes a post, the comments for that post should also 
 	 * be deleted. 
 	 */
 	Route::post('/posts/delete', function(){
-
+		$id = request('id');
+		if (!empty($id))
+		{
+			DB::delete('DELETE FROM Posts WHERE id = ?', [$id]);
+			DB::delete('DELETE FROM Comments WHERE post_id = ?', [$id]);
+		}
+		return redirect(getRedirect(Request::server('HTTP_REFERER')));
 	});
 
 	/**
+	 * Comments creation handler
+	 * 
 	 * Rubric: Add comment
 	 * Users can add comments to a post. A comment must have a message and a user, but no title. 
 	 */
@@ -180,7 +200,7 @@
 		// Some really stupidly naive sanity checking. Won't block any real attempts to bypass.
 		if (is_string($username) && is_string($content) && strlen($username) <= 80)
 		{
-			$postId = DB::table('Comments')->insert([
+			DB::table('Comments')->insert([
 				'timestamp' => time(),
 				'post_id' => $postId,
 				'username' => $username,
@@ -191,9 +211,21 @@
 	});
 
 	/**
+	 * Comments delete handler
+	 * 
 	 * Rubric: Delete comment
 	 * Users can delete comments.
 	 */
 	Route::post('/comments/delete', function(){
-
+		$id = request('id');
+		if (!empty($id))
+		{
+			DB::delete('DELETE FROM Comments WHERE id = ?', [$id]);
+		}
+		return redirect(getRedirect(Request::server('HTTP_REFERER')));
 	});
+
+	function getRedirect($referer)
+	{
+		return '/';
+	}
