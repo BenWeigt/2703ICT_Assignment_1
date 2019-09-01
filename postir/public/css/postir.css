@@ -102,6 +102,9 @@ h1 {
 	-moz-box-shadow: 0px 2px 11px 0px #0f1011;
 	box-shadow: 0px 2px 11px 0px #0f1011;
 }
+.user-username {
+	line-height: 85px;
+}
 .user-username, .user-post-count {
 	width: 100%;
 	text-align: center;
@@ -134,6 +137,7 @@ h1 {
 	display: inline-block;
 	vertical-align: text-top;
 	line-height: 42px;
+	padding-left: 2px;
 }
 
 .post:hover, .user:hover {
