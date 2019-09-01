@@ -88,9 +88,9 @@ h1 {
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: space-between;
+	margin: -5px;
 }
 .user {
-	width: calc(50% - 5px);
 	box-sizing: border-box;
 	background-color: #3b3e46;
 	cursor: pointer;
@@ -101,6 +101,8 @@ h1 {
 	-webkit-box-shadow: 0px 2px 11px 0px #0f1011;
 	-moz-box-shadow: 0px 2px 11px 0px #0f1011;
 	box-shadow: 0px 2px 11px 0px #0f1011;
+	flex-grow: 1;
+	margin: 5px;
 }
 .user-username {
 	line-height: 85px;
