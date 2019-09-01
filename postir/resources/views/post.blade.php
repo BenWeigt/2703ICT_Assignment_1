@@ -37,20 +37,9 @@
 			<p class="post-content">{{$post->content}}</p>
 		</div>
 		{{-- Post body edit --}}
-		<form id="post-body-edit" method="post" action="{{REL_DIR}}/posts/edit" style="display: none">
-			{{csrf_field()}}
-			<input name="id" type="hidden" value="{{$post->id}}">
-			<div class="form-group">
-				<input name="username" type="text" class="form-control" placeholder="{{$post->username}}" value="{{$post->username}}" required>
-			</div>
-			<div class="form-group">
-				<input name="title" type="text" class="form-control" placeholder="{{$post->title}}" value="{{$post->title}}" required>
-			</div>
-			<div class="form-group">
-				<textarea name="content" class="form-control" required>{{$post->content}}</textarea>
-			</div>
-			<button type="submit" class="btn btn-primary" style="display: block; margin: auto;">Update</button>
-		</form>
+		<div id="post-body-edit">
+			@include('components/post-create')
+		</div>
 
 		{{-- Comment feed --}}
 		<div class="comments">
