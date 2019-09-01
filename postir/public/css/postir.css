@@ -6,6 +6,89 @@ body {
 	color: #fff;
 }
 
+
+
+.emoji-anim {
+	display: inline-block;
+	position: relative;
+	width: 28px;
+	white-space: nowrap;
+	vertical-align: text-bottom;
+}
+.emoji-anim .emoji-anim-emoji {
+	position: absolute;
+	left: 0;
+	display: inline-block;
+	width: 28px;
+	text-align: center;
+	-webkit-transform: translateX(-50px) rotate(-540deg);
+            transform: translateX(-50px) rotate(-540deg);
+    opacity: 0;
+	-webkit-animation: roll-in-left 28s ease-out infinite;
+	        animation: roll-in-left 28s ease-out infinite;
+}
+.emoji-anim-emoji:nth-child(1) {
+	position: relative;
+}
+.emoji-anim-emoji:nth-child(2) {animation-delay: 2s;}
+.emoji-anim-emoji:nth-child(3) {animation-delay: 4s;}
+.emoji-anim-emoji:nth-child(4) {animation-delay: 6s;}
+.emoji-anim-emoji:nth-child(5) {animation-delay: 8s;}
+.emoji-anim-emoji:nth-child(6) {animation-delay: 10s;}
+.emoji-anim-emoji:nth-child(7) {animation-delay: 12s;}
+.emoji-anim-emoji:nth-child(8) {animation-delay: 14s;}
+.emoji-anim-emoji:nth-child(9) {animation-delay: 16s;}
+.emoji-anim-emoji:nth-child(10) {animation-delay: 18s;}
+.emoji-anim-emoji:nth-child(11) {animation-delay: 20s;}
+.emoji-anim-emoji:nth-child(12) {animation-delay: 22s;}
+.emoji-anim-emoji:nth-child(13) {animation-delay: 24s;}
+.emoji-anim-emoji:nth-child(14) {animation-delay: 26s;}
+.emoji-anim-emoji:nth-child(15) {animation-delay: 28s;}	
+
+@-webkit-keyframes roll-in-left {
+	0% {
+		-webkit-transform: translateX(-50px) rotate(-540deg);
+		transform: translateX(-50px) rotate(-540deg);
+		opacity: 0;
+	}
+	3.57%, 7.14% {
+		-webkit-transform: translateX(0) rotate(0deg);
+		transform: translateX(0) rotate(0deg);
+    	opacity: 1;
+  	}
+	10.71%, 100% {
+		-webkit-transform: translateX(-50px) rotate(-540deg);
+		transform: translateX(-50px) rotate(-540deg);
+		opacity: 0;
+	}
+}
+@keyframes roll-in-left {
+	0% {
+		-webkit-transform: translateX(-50px) rotate(-540deg);
+		transform: translateX(-50px) rotate(-540deg);
+		opacity: 0;
+	}
+	3.57%, 7.14% {
+		-webkit-transform: translateX(0) rotate(0deg);
+		transform: translateX(0) rotate(0deg);
+    	opacity: 1;
+  	}
+	10.71%, 100% {
+		-webkit-transform: translateX(-50px) rotate(-540deg);
+		transform: translateX(-50px) rotate(-540deg);
+		opacity: 0;
+	}
+}
+
+
+
+
+
+
+
+
+
+
 .post {
 	box-sizing: border-box;
 	background-color: #3b3e46;
@@ -23,8 +106,8 @@ body {
 	grid-column-gap: 0px;
 	grid-row-gap: 0px;
 	grid-template-areas: "count      post-username"
-                       "post-icon  post-title"
-                       "post-icon  post-content";
+                         "post-icon  post-title"
+                         "post-icon  post-content";
 }
 .post-comment-count {
 	grid-area: count;
@@ -44,12 +127,12 @@ body {
 	font-size: 30px;
 }
 .post-comment-count, .post-comment-count:before {
-	color: transparent;
 	background: linear-gradient(233deg, #70f36f, #ffb369, #40e4ff, #fe7aff, #c23eff, #fffb3e);
 	background-size: 800% 800%;
 	-webkit-animation: bg-gradient-anim 19s ease infinite;
 	-moz-animation: bg-gradient-anim 19s ease infinite;
 	animation: bg-gradient-anim 19s ease infinite;
+	color: transparent;
 	-webkit-background-clip: text;
 }
 
@@ -81,6 +164,36 @@ div.post-icon {
 	-webkit-line-clamp: 5;
 	-webkit-box-orient: vertical;
 }
+
+
+.post-create {
+	box-sizing: border-box;
+	background-color: #007709;
+	cursor: pointer;
+	border-radius: 4px;
+	color: #ffffff;
+	padding: 5px;
+	margin: 0;
+	-webkit-box-shadow: 0px 2px 11px 0px #0f1011;
+	-moz-box-shadow: 0px 2px 11px 0px #0f1011;
+	box-shadow: 0px 2px 11px 0px #0f1011;
+}
+.post-create:before{
+	content: '✚';
+	font-size: 35px;
+	background: linear-gradient(233deg, #70f36f, #ffb369, #40e4ff, #fe7aff, #c23eff, #fffb3e);
+	background-size: 800% 800%;
+	-webkit-animation: bg-gradient-anim 19s ease infinite;
+	-moz-animation: bg-gradient-anim 19s ease infinite;
+	animation: bg-gradient-anim 19s ease infinite;
+	color: transparent;
+	-webkit-background-clip: text;
+}
+
+
+
+
+
 
 .effect-bg-gradient
 {

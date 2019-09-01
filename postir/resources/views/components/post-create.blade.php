@@ -1,17 +1,33 @@
 {{-- Post create --}}
-<form method="post" action="{{REL_DIR}}/posts/create" style="max-width: 750px; margin: auto;">
+<form method="post" id="post-create" action="{{REL_DIR}}/posts/create" class="post-create">
 	{{csrf_field()}}
-	<div class="form-group">
-		<label for="new-post-username">Username</label>
-		<input name="username" type="text" class="form-control" id="new-post-username" required>
-	</div>
-	<div class="form-group">
-		<label for="new-post-title">Title</label>
-		<input name="title" type="text" class="form-control" id="new-post-title" required>
-	</div>
-	<div class="form-group">
-		<label for="new-post-content">Content</label>
-		<textarea name="content" class="form-control" id="new-post-content" required></textarea>
-	</div>
+	<input name="username" type="text" class="form-control" id="new-post-username" required>
+	<input name="title" type="text" class="form-control" id="new-post-title" required>
+	<textarea name="content" class="form-control" id="new-post-content" required></textarea>
 	<button type="submit" class="btn btn-primary" style="display: block; margin: auto;">Create Post</button>
+
+	<script>
+		(()=>{
+			const form = document.getElementById('post-create');
+			const inputUsername = document.getElementById('new-post-username');
+			const inputTitle = document.getElementById('new-post-title');
+			const inputContent = document.getElementById('new-post-content');
+			
+			form.addEventListener('focus', (evt)=>{
+				if (evt.target && form.contains(evt.target))
+				{
+					form.classList.add('post-create-focused');
+				}
+			}, true);
+			form.addEventListener('blur', (evt)=>{
+				if (evt.target && form.contains(evt.target) && (!evt.relatedTarget || !form.contains(evt.relatedTarget)))
+				{
+					if (!inputUsername.value && !inputTitle.value && !inputContent.value)
+					{
+						form.classList.remove('post-create-focused');
+					}
+				}
+			}, true);
+		})();
+	</script>
 </form>
