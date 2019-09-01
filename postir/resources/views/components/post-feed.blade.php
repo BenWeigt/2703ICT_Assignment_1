@@ -8,7 +8,7 @@
 			<img class="post-icon" src="{{$post->icon}}">
 		@endif
 		<div class="post-comment-count">{{$post->comment_count}}</div>
-		<div class="post-username">By <a href="{{REL_DIR}}/users/{{$post->username}}/posts">{{$post->username}}</a> &#x40;{{date('m/d/Y H:i:s', $post->timestamp)}}</div>
+		<div class="post-username">By <a href="{{REL_DIR}}/users/{{$post->username}}/posts">{{$post->username}}</a><small> &#x40;{{date('d/m/y H:i', $post->timestamp)}}</small></div>
 			<h3 class="post-title">{{$post->title}}</h3>
 			<p class="post-content">{{$post->content}}</p>
 		</div>
