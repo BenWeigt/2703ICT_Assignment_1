@@ -1,6 +1,7 @@
 @extends('designs/postir')
 
 @section('content')
+	<h1>{{$post->username}}'s Post</h1>
 	{{-- Verbose Post display --}}
 	<div class="post fullpage">
 		{{-- The Post icon supports two types: a single grapheme emoji, or a base64 encoded image url. --}}
