@@ -2,13 +2,13 @@
 <div class="posts">
 	@foreach ($posts as $post)
 		<div class="post" data-post-id="{{$post->id}}">
-			@if (substr($post->icon, 0, 21) !== 'data:image/png;base64')
-				<div class="post-icon">{{$post->icon}}</div>
-			@else
-				<img class="post-icon" src="{{$post->icon}}">
-			@endif
-			<div class="post-comment-count">{{$post->comment_count}}</div>
-		<div class="post-username">By <a href="{{REL_DIR}}/users/{{$post->username}}/posts">{{$post->username}}</a> @{{date('m/d/Y H:i:s', $post->timestamp)}}</div>
+		@if (substr($post->icon, 0, 21) !== 'data:image/png;base64')
+			<div class="post-icon">{{$post->icon}}</div>
+		@else
+			<img class="post-icon" src="{{$post->icon}}">
+		@endif
+		<div class="post-comment-count">{{$post->comment_count}}</div>
+		<div class="post-username">By <a href="{{REL_DIR}}/users/{{$post->username}}/posts">{{$post->username}}</a> &#x40;{{date('m/d/Y H:i:s', $post->timestamp)}}</div>
 			<h3 class="post-title">{{$post->title}}</h3>
 			<p class="post-content">{{$post->content}}</p>
 		</div>
