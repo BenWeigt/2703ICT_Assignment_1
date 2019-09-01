@@ -142,12 +142,9 @@ h1 {
 	padding-left: 2px;
 }
 
-.post:hover, .user:hover {
+.post:not(.fullpage):hover, .user:hover {
 	transform: scale(1.0075);
 }
-
-
-
 
 .post {
 	box-sizing: border-box;
@@ -168,6 +165,18 @@ h1 {
 	grid-template-areas: "count      post-username"
                          "post-icon  post-title"
                          "post-icon  post-content";
+}
+
+.post.fullpage {
+	grid-template-columns: max-content auto;
+	grid-template-rows: repeat(5, max-content);
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	grid-template-areas: "count         post-username"
+                         "post-icon     post-title"
+                         "post-icon     post-content"
+                         "post-comments post-comments"
+                         "new-comment   new-comment";
 }
 
 .post-comment-count {
@@ -227,7 +236,7 @@ div.post-icon {
 	-webkit-box-orient: vertical;
 }
 
-.post-create {
+.post-create, #comment-create {
 	position: relative;
 	box-sizing: border-box;
 	border-bottom: 4px solid #007709;
@@ -241,7 +250,7 @@ div.post-icon {
 	box-shadow: 0px 2px 11px 0px #0f1011;
 	transition: all 200ms ease;
 }
-.post-create:before {
+.post-create:before, #comment-create:before {
 	content: '✚Post';
 	position: absolute;
 	font-weight: 600;
@@ -259,29 +268,52 @@ div.post-icon {
 	-webkit-background-clip: text;
 	transition: all 200ms ease;
 }
+#comment-create {
+	grid-area: new-comment;
+}
+#comment-create:before {
+	padding-left: 10px;
+	font-size: 22px;
+	content: '✚Comment'
+}
 .post-create.focused:before {
 	font-size: 20px;
 	padding-left: 9px;
 }
+#comment-create.focused:before {
+	font-size: 17px;
+	padding-left: 3px;
+	text-orientation: inherit;
+	writing-mode: vertical-rl;
+	letter-spacing: -4px;
+	text-orientation: upright;
+}
 .post-create.focused {
 	padding-left: 75px;
 }
+#comment-create.focused {
+	padding-left: 40px;
+}
 
-
-#new-post-title, #new-post-content, .post-create button {
+#new-post-title,
+#new-post-content,
+.post-create button,
+#new-comment-username,
+#new-comment-content,
+#comment-create button {
 	transition: transform 200ms ease, width 200ms ease;
 }
-#new-post-username {
+#new-post-username, #new-comment-username {
 	display: inline-block;
 	max-width: 200px;
 }
-#new-post-content {
+#new-post-content, #new-comment-content {
 	margin-bottom: 5px;
 }
 #new-post-title, .post-create button {
 	margin: 5px auto;
 }
-.post-create button {
+.post-create button, #comment-create button {
 	background-color: #007709;
 	display: block;
 	outline: none;
@@ -291,8 +323,10 @@ div.post-icon {
 }
 
 .post-create:not(.focused) > #new-post-content,
+#comment-create:not(.focused) > #new-comment-content,
 .post-create:not(.focused) > #new-post-title,
-.post-create:not(.focused) > button {
+.post-create:not(.focused) > button,
+#comment-create:not(.focused) > button {
 	transform: scale(0);
 	pointer-events: none;
 	box-sizing: border-box;

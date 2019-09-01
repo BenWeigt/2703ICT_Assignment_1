@@ -2,7 +2,7 @@
 
 @section('content')
 	{{-- Verbose Post display --}}
-	<div class="post">
+	<div class="post fullpage">
 		{{-- The Post icon supports two types: a single grapheme emoji, or a base64 encoded image url. --}}
 		@if (substr($post->icon, 0, 21) !== 'data:image/png;base64')
 			<div class="post-icon">{{$post->icon}}</div> {{-- emoji --}}
@@ -64,40 +64,6 @@
 				</div>
 			@endforeach
 
-			{{-- Comment create --}}
-			<form id="comment-create" method="post" action="{{REL_DIR}}/comments/create" style="max-width: 750px; margin: auto;">
-				{{csrf_field()}}
-				<input name="post_id" type="hidden" value="{{$post->id}}">
-				<input id="new-comment-username" name="username" type="text" class="form-control" id="new-comment-username" placeholder="Username" title="Any combination of 3 to 24 letters, numbers, dashes and underscores." required minlength="3" maxlength="24" pattern="[a-zA-Z0-9_-]*">
-				<textarea id="new-comment-content" name="content" class="form-control" id="new-comment-content" placeholder="What are your thoughts?" required></textarea>
-				<button type="submit" class="btn btn-primary">Comment</button>
-
-				{{-- Focus handler --}}
-				<script>
-					(()=>{
-						const form = document.getElementById('comment-create');
-						const inputUsername = document.getElementById('new-comment-username');
-						const inputContent = document.getElementById('new-comment-content');
-						
-						form.addEventListener('focus', (evt)=>{
-							if (evt.target && form.contains(evt.target))
-							{
-								form.classList.add('focused');
-							}
-						}, true);
-						form.addEventListener('blur', (evt)=>{
-							if (evt.target && form.contains(evt.target) && (!evt.relatedTarget || !form.contains(evt.relatedTarget)))
-							{
-								if (!inputUsername.value && !inputContent.value)
-								{
-									form.classList.remove('focused');
-								}
-							}
-						}, true);
-					})();
-				</script>
-			</form>
-
 			{{-- Comment delete handler --}}
 			{{-- We could include an instance of this form for every comment, but hooking them leads to a cleaner dom --}}
 			<form method="post" action="{{REL_DIR}}/comments/delete" style="display: none">
@@ -117,5 +83,38 @@
 				})();
 			</script>
 		</div>
+		{{-- Comment create --}}
+		<form id="comment-create" method="post" action="{{REL_DIR}}/comments/create">
+			{{csrf_field()}}
+			<input name="post_id" type="hidden" value="{{$post->id}}">
+			<input id="new-comment-username" name="username" type="text" class="form-control" id="new-comment-username" placeholder="Username" title="Any combination of 3 to 24 letters, numbers, dashes and underscores." required minlength="3" maxlength="24" pattern="[a-zA-Z0-9_-]*">
+			<textarea id="new-comment-content" name="content" class="form-control" id="new-comment-content" placeholder="What are your thoughts?" required></textarea>
+			<button type="submit" class="btn btn-primary">Comment</button>
+
+			{{-- Focus handler --}}
+			<script>
+				(()=>{
+					const form = document.getElementById('comment-create');
+					const inputUsername = document.getElementById('new-comment-username');
+					const inputContent = document.getElementById('new-comment-content');
+					
+					form.addEventListener('focus', (evt)=>{
+						if (evt.target && form.contains(evt.target))
+						{
+							form.classList.add('focused');
+						}
+					}, true);
+					form.addEventListener('blur', (evt)=>{
+						if (evt.target && form.contains(evt.target) && (!evt.relatedTarget || !form.contains(evt.relatedTarget)))
+						{
+							if (!inputUsername.value && !inputContent.value)
+							{
+								form.classList.remove('focused');
+							}
+						}
+					}, true);
+				})();
+			</script>
+		</form>
 	</div>
 @endsection
