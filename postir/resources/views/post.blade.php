@@ -72,11 +72,11 @@
 			</form>
 			<script>
 				(()=>{
-					const comments = document.querySelectorAll('.comment'),
+					const commentRemovers = document.querySelectorAll('.comment-remove'),
 					      input = document.getElementById('remove-comment-id');
-					for (const comment of comments) {
-						comment.addEventListener('click', ()=>{
-							input.value = comment.dataset.commentId;
+					for (const commentRemover of commentRemovers) {
+						commentRemover.addEventListener('click', ()=>{
+							input.value = commentRemover.dataset.commentId;
 							input.form.submit();
 						});
 					}

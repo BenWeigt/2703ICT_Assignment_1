@@ -168,6 +168,8 @@ h1 {
 }
 
 .post.fullpage {
+	position: relative;
+	cursor: default;
 	grid-template-columns: max-content auto;
 	grid-template-rows: repeat(5, max-content);
 	grid-column-gap: 0px;
@@ -250,6 +252,15 @@ div.post-icon {
 	box-shadow: 0px 2px 11px 0px #0f1011;
 	transition: all 200ms ease;
 }
+#comment-create {
+	border: 1px solid #1f212488;
+	border-radius: 2px;
+	background-color: transparent;
+	margin: 0 5px 5px 0;
+	-webkit-box-shadow: 0px 2px 11px 0px #1f212488;
+	-moz-box-shadow: 0px 2px 11px 0px #1f212488;
+	box-shadow: 0px 2px 11px 0px #1f212488;
+}
 .post-create:before, #comment-create:before {
 	content: '✚Post';
 	position: absolute;
@@ -310,8 +321,14 @@ div.post-icon {
 #new-post-content, #new-comment-content {
 	margin-bottom: 5px;
 }
+#new-comment-content {
+	margin-top: 5px;
+}
 #new-post-title, .post-create button {
 	margin: 5px auto;
+}
+#comment-create button {
+	margin: 0 auto;
 }
 .post-create button, #comment-create button {
 	background-color: #007709;
@@ -339,17 +356,77 @@ div.post-icon {
 }
 
 @media only screen and (max-width: 575px) {
-	.post-create button {
+	.post-create button,
+	#comment-create button,
+	{
 		width: 100%;
 	}
+	#comment-create.focused:before,
 	.post-create.focused:before {
 		transform: translateY(-50%) scale(0);
 		opacity: 0;
 	}
+	#comment-create.focused,
 	.post-create.focused {
 		padding-left: 5px;
 	}
 }
+
+.comments {
+	grid-area: post-comments;
+	border: 1px solid #1f212488;
+	border-radius: 2px;
+	background-color: transparent;
+	margin: 0 5px 5px 0;
+	-webkit-box-shadow: 0px 2px 11px 0px #1f212488;
+	-moz-box-shadow: 0px 2px 11px 0px #1f212488;
+	box-shadow: 0px 2px 11px 0px #1f212488;
+}
+.comment {
+	position: relative;
+}
+.comment-remove, .post-remove {
+	cursor: pointer;
+	position: absolute;
+	font-size: 22px;
+	right: 0;
+	top: 0;
+	color: transparent;
+	background: #F44336;
+	-webkit-background-clip: text;
+	transition: all 100ms ease;
+	opacity: 0.2;
+}
+.comment-remove:hover, .post-remove:hover {
+	opacity: 1;
+}
+.comment-remove:before, .post-remove:before {
+	content: '❌';
+}
+.comment-username {
+	background: linear-gradient(233deg, #70f36f, #ffb369, #40e4ff, #fe7aff, #c23eff, #fffb3e);
+	background-size: 800% 800%;
+	-webkit-animation: bg-gradient-anim 19s ease infinite;
+	-moz-animation: bg-gradient-anim 19s ease infinite;
+	animation: bg-gradient-anim 19s ease infinite;
+	color: transparent;
+	-webkit-background-clip: text;
+	font-size: 20px;
+	font-weight: 600;
+	padding-left: 10px;
+}
+.comment-username:after {
+	content: '⤵';
+	font-weight: 900;
+	font-size: 30px;
+	line-height: 10px;
+	vertical-align: bottom;
+	font-family: u2800;
+}
+.comment-content {
+	padding: 0 5px 0 20px;
+}
+
 
 .effect-bg-gradient
 {
