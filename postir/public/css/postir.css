@@ -138,6 +138,7 @@ div.post-icon {
 	height: 120px;
 	line-height: 100px;
 	align-self: center;
+	min-width: 140px;
 }
 .post-username {
 	grid-area: post-username;
