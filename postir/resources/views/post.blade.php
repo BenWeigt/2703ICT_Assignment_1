@@ -37,9 +37,14 @@
 			<p class="post-content">{{$post->content}}</p>
 		</div>
 		{{-- Post body edit --}}
-		<div id="post-body-edit">
-			@include('components/post-create')
-		</div>
+		<form id="post-body-edit" method="post" action="{{REL_DIR}}/posts/edit">
+			{{csrf_field()}}
+			<input name="id" type="hidden" value="{{$post->id}}">
+			<input name="username" type="text" class="form-control" id="new-post-username" placeholder="Username" value="{{$post->username}}" required title="Any combination of 3 to 24 letters, numbers, dashes and underscores." required minlength="3" maxlength="24" pattern="[a-zA-Z0-9_-]*">
+			<input name="title" type="text" class="form-control" id="edit-post-title" value="{{$post->title}}" placeholder="Post title" required minlength="3" maxlength="80">
+			<textarea name="content" class="form-control" id="edit-post-content" required>{{$post->content}}</textarea>
+			<button type="submit" class="btn btn-primary">Update</button>
+		</form>
 
 		{{-- Comment feed --}}
 		<div class="comments">
