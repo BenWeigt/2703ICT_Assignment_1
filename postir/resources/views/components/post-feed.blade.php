@@ -8,7 +8,7 @@
 				<img class="post-icon" src="{{$post->icon}}">
 			@endif
 			<div class="post-comment-count">{{$post->comment_count}}</div>
-			<div class="post-username">{{$post->username}}</div>
+			<div class="post-username"><a href="{{REL_DIR}}/users/{{$post->username}}">{{$post->username}}</a></div>
 			<h3 class="post-title">{{$post->title}}</h3>
 			<p class="post-content">{{$post->content}}</p>
 		</div>

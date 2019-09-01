@@ -1,3 +1,108 @@
 html {
-	background-color: #1e2123;
+	background-color: #1f2124;
+}
+body {
+	background-color: transparent;
+	color: #fff;
+}
+
+.post {
+	box-sizing: border-box;
+	background-color: #3b3e46;
+	cursor: pointer;
+	border-radius: 4px;
+	color: #ffffff;
+	padding: 5px 0 0 5px;
+	margin: 5px 0;
+	-webkit-box-shadow: 0px 2px 11px 0px #0f1011;
+	-moz-box-shadow: 0px 2px 11px 0px #0f1011;
+	box-shadow: 0px 2px 11px 0px #0f1011;
+	display: grid;
+	grid-template-columns: max-content auto;
+	grid-template-rows: repeat(3, max-content);
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	grid-template-areas: "count      post-username"
+                       "post-icon  post-title"
+                       "post-icon  post-content";
+}
+.post-comment-count {
+	grid-area: count;
+	font-size: 25px;
+	padding-left: 33px;
+	box-sizing: border-box;
+	position: relative;
+	line-height: 22px;
+}
+.post-comment-count:before {
+	pointer-events: none;
+	content: '🗩';
+	position: absolute;
+	left: 0px;
+	line-height: initial;
+	transform: scaleY(1.25) translateY(-10px);
+	font-size: 30px;
+}
+.post-comment-count, .post-comment-count:before {
+	color: transparent;
+	background: linear-gradient(233deg, #70f36f, #ffb369, #40e4ff, #fe7aff, #c23eff, #fffb3e);
+	background-size: 800% 800%;
+	-webkit-animation: bg-gradient-anim 19s ease infinite;
+	-moz-animation: bg-gradient-anim 19s ease infinite;
+	animation: bg-gradient-anim 19s ease infinite;
+	-webkit-background-clip: text;
+}
+
+.post-icon {
+	grid-area: post-icon;
+}
+div.post-icon {
+	font-size: 100px;
+	text-align: center;
+	height: 120px;
+	line-height: 100px;
+	align-self: center;
+}
+.post-username {
+	grid-area: post-username;
+}
+.post-title {
+	grid-area: post-title;
+}
+.post-content {
+	display: -webkit-box;
+	grid-area: post-content;
+	word-wrap:break-word;
+	max-height: 150px;
+	padding: 0px 5px 5px 0px;
+	margin: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
+}
+
+.effect-bg-gradient
+{
+	background: linear-gradient(233deg, #70f36f, #ffb369, #40e4ff, #fe7aff, #c23eff, #fffb3e);
+	background-size: 800% 800%;
+
+	-webkit-animation: bg-gradient-anim 19s ease infinite;
+	-moz-animation: bg-gradient-anim 19s ease infinite;
+	animation: bg-gradient-anim 19s ease infinite;
+}
+@-webkit-keyframes bg-gradient-anim {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes bg-gradient-anim {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes bg-gradient-anim { 
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
 }
