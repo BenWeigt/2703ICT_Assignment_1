@@ -4,11 +4,12 @@
 	<h1>Documentation</h1>
 
 	<h2>ER Diagram</h2>
-	Via embed:
+	<p>Via embed:</p>
 	<iframe width="560" height="315" src='https://dbdiagram.io/embed/5d6c1ef1ced98361d6de1942'></iframe>
 
 	<h2>Notes about Postir</h2>
 	<p>
+		<a href="https://github.com/BenWeigt/2703ICT_Assignment_1">Assignment GitHub Link</a><br>
 		Every element of the rubric should find its satisfaction in the implementation.
 		There is some concern that the db structure felt too easy, but it does appear to fulfil every requirement.
 		Sanitisation was kept light and only slightly exceeds the bounds of the course material (regex).
