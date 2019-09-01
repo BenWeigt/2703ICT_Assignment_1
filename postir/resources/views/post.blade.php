@@ -32,7 +32,7 @@
 
 		{{-- Post body --}}
 		<div id="post-body">
-			<div class="post-username">{{$post->username}}</div>
+			<div class="post-username">By <a href="{{REL_DIR}}/users/{{$post->username}}/posts">{{$post->username}}</a></div>
 			<h3 class="post-title">{{$post->title}}</h3>
 			<p class="post-content">{{$post->content}}</p>
 		</div>
