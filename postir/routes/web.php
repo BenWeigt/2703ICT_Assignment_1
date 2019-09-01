@@ -250,9 +250,18 @@
 		{
 			return redirect('/');
 		}
+
+		// Look the post id up so we can return cleanly
+		$postId = DB::select('SELECT post_id FROM Comments WHERE id = ?', [$id]);
+		if (!isset($postId[0]))
+		{
+			return redirect('/');
+		}
+		$postId = $postId[0]->post_id;
 		
 		// Sanitisation via PDO within laravel abstraction
 		DB::delete('DELETE FROM Comments WHERE id = ?', [$id]);
 		// A further improvement might be to check Request::server('HTTP_REFERER') and redirect
 		// back to a more natural return point where possible.
+		return redirect('/posts/'.$postId);
 	});
